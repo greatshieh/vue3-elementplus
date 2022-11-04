@@ -1,0 +1,21 @@
+@use 'mixins/button' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+
+.btn {
+  color: var(--ant-btn-text-color);
+  border-color: var(--ant-btn-border-color);
+  background-color: var(--ant-btn-bg-color);
+
+  &:hover {
+    color: var(--ant-btn-hover-text-color);
+    border-color: var(--ant-btn-hover-border-color);
+    background-color: var(--ant-btn-hover-bg-color);
+  }
+}
+
+@each $type in $types {
+  @include m('btn', $type) {
+    @include button-variant($type);
+  }
+}

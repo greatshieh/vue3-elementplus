@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+
+@mixin tag-variant($type) {
+  $tag-color-types: (
+    '': (
+      'text-color': (
+        $type,
+        'color'
+      ),
+      'bg-color': (
+        $type,
+        'light-7',
+        'color'
+      ),
+      'border-color': (
+        $type,
+        'light-7',
+        'color'
+      )
+    ),
+    'hover': (
+      'text-color': (
+        'white',
+        'color'
+      ),
+      'bg-color': (
+        $type,
+        'color'
+      ),
+      'border-color': (
+        $type,
+        'color'
+      )
+    )
+  );
+  @each $type, $typeMap in $tag-color-types {
+    @each $typeColor, $list in $typeMap {
+      @include css-var-from-global(('tag', $type, $typeColor), $list);
+    }
+  }
+}

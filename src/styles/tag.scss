@@ -1,0 +1,15 @@
+@use 'mixins/tag' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+
+.tag {
+  color: var(--ant-tag-text-color);
+  border-color: var(--ant-tag-border-color);
+  background-color: var(--ant-tag-bg-color);
+}
+
+@each $type in $types {
+  @include m('tag', $type) {
+    @include tag-variant($type);
+  }
+}

@@ -1,0 +1,24 @@
+// https://github.com/element-plus/element-plus
+@use 'config';
+
+// join var name
+// joinVarName(('button', 'text-color')) => '--el-button-text-color'
+@function joinVarName($list) {
+  $name: '--' + config.$namespace;
+  @each $item in $list {
+    @if $item != '' and $item != 'base' {
+      $name: $name + '-' + $item;
+    }
+  }
+  @return $name;
+}
+
+// getCssVarName('success', 'color', 'hover') => '--ant-success-color-hover'
+@function getCssVarName($args...) {
+  @return joinVarName($args);
+}
+
+// getCssVar('success', 'color', 'hover') => var(--ant-success-color-hover)
+@function getCssVar($args...) {
+  @return var(#{joinVarName($args)});
+}

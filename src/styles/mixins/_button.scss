@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+
+@mixin button-variant($type) {
+  $button-color-types: (
+    '': (
+      'text-color': (
+        'white',
+        'color'
+      ),
+      'bg-color': (
+        $type,
+        'color'
+      ),
+      'border-color': (
+        $type,
+        'color'
+      )
+    ),
+    'hover': (
+      'text-color': (
+        'white',
+        'color'
+      ),
+      'bg-color': (
+        $type,
+        'light-3',
+        'color'
+      ),
+      'border-color': (
+        $type,
+        'light-3',
+        'color'
+      )
+    )
+  );
+  @each $type, $typeMap in $button-color-types {
+    @each $typeColor, $list in $typeMap {
+      @include css-var-from-global(('btn', $type, $typeColor), $list);
+    }
+  }
+}
